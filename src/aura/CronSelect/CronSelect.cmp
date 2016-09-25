@@ -1,0 +1,18 @@
+<aura:component extends="c:Cron">
+
+    <aura:attribute access="public" name="selectOptions" type="Object[]" required="true"/>
+
+	<aura:handler name="change" event="ui:change" action="{!c.handleChangeEvent}"/>
+    
+    <c:Form aura:id="cronSelectForm" class="slds-form--inline">
+		<c:FormElement required="true">
+            <ui:inputSelect aura:id="cronSelect" class="slds-input" 
+                            label="{!v.cronType}" labelClass="slds-form-element__label" 
+                            value="{!v.cron}">
+      			<aura:iteration items="{!v.selectOptions}" var="selectOption">
+    				<ui:inputSelectOption text="{!selectOption.value}" label="{!selectOption.label}"/>
+				</aura:iteration>
+            </ui:inputSelect>
+        </c:FormElement>
+    </c:Form>
+</aura:component>

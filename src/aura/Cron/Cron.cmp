@@ -1,0 +1,15 @@
+<aura:component abstract="true" extensible="true">
+    
+    <aura:attribute access="public" name="cron" type="String" required="true"/>
+    <aura:attribute access="public" name="cronType" type="String" required="true"/>
+    
+    <aura:method access="public" name="doHelperMethod" action="{!c.doHelperMethod}">
+        <aura:attribute name="name" type="String"/>
+        <aura:attribute name="arguments" type="Object[]"/>
+    </aura:method> 
+    
+    <aura:registerEvent access="public" name="cronUpdate" type="c:CronUpdate"/>
+    
+    {!v.body}
+    
+</aura:component>

@@ -1,0 +1,4 @@
+<aura:component >
+    <aura:attribute access="public" name="message" type="String" required="true"/>
+    <span class="slds-form-element__help">{!v.message}</span>
+</aura:component>

@@ -1,0 +1,20 @@
+<aura:component >
+    
+    <aura:attribute access="public" name="tabs" type="Aura.Component[]" required="true"/>
+    <aura:attribute access="public" name="class" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <aura:registerEvent name="tabFocus" type="c:TabFocus"/>
+    <aura:registerEvent name="tabBlur" type="c:TabBlur"/>
+    
+    <div class="{!'slds-tabs--scoped ' + v.class}">
+        <ul class="slds-tabs--scoped__nav" role="tablist">
+			{!v.tabs}
+        </ul>
+        <div id="tabPanel" class="slds-tabs--scoped__content slds-show" role="tabpanel">
+            {!v.body}
+        </div>
+    </div>
+    
+</aura:component>

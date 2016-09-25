@@ -1,0 +1,51 @@
+<aura:component >
+    <aura:attribute access="public" name="class" type="String"/>
+    <aura:attribute access="public" name="headerClass" type="String"/>
+    <aura:attribute access="public" name="bodyClass" type="String"/>
+    <aura:attribute access="public" name="footerClass" type="String"/>
+    <aura:attribute access="public" name="header" type="Aura.Component[]"/>
+    <aura:attribute access="public" name="footer" type="Aura.Component[]"/>
+    <aura:attribute access="public" name="cancelAction" type="Aura.Action" default="{!c.closeModal}"/>
+    <aura:attribute access="public" name="closeAction" type="Aura.Action" default="{!c.closeModal}"/>
+    <aura:attribute access="public" name="okAction" type="Aura.Action" default="{!c.closeModal}"/>
+    <aura:attribute access="public" name="cancelButtonLabel" type="String" default="Cancel"/>
+    <aura:attribute access="public" name="okButtonLabel" type="String" default="OK"/>
+    <aura:attribute access="public" name="showCancelButton" type="Boolean" default="true"/>
+    <aura:attribute access="public" name="showCloseButton" type="Boolean" default="true"/>
+    <aura:attribute access="public" name="showOkButton" type="Boolean" default="true"/>
+    <aura:method access="public" name="close" action="{!c.closeModal}"/>
+    <aura:method access="public" name="open" action="{!c.openModal}"/>
+    <div>
+		<div aura:id="sldsModal" aria-hidden="false" role="dialog" class="slds-modal">
+            <div class="{!'slds-modal__container ' + if(not(empty(v.class)), v.class, '')}">
+				<div class="{!'slds-modal__header ' + if(not(empty(v.headerClass)), v.headerClass, '')}">
+                    {!v.header}
+                    <aura:if isTrue="{!v.showCloseButton}">
+                        <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!v.closeAction}">
+                            <c:svg ariaHidden="true" class="slds-button__icon slds-button__icon--large" 
+                                   xlinkHref="/resource/SLDS0101/assets/icons/action-sprite/svg/symbols.svg#close"/>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </aura:if>
+      			</div>
+      			<div class="{!'slds-modal__content ' + if(not(empty(v.bodyClass)), v.bodyClass, '')}">
+                    {!v.body}
+      			</div>
+      			<div class="{!'slds-modal__footer ' + if(not(empty(v.footerClass)), v.footerClass, '')}">
+                    <aura:if isTrue="{!not(empty(v.footer))}">
+                    	{!v.footer}
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!v.showOkButton}">
+                                <button class="slds-button slds-button--neutral" onclick="{!v.okAction}">{!v.okButtonLabel}</button>
+                            </aura:if>
+                            <aura:if isTrue="{!v.showCancelButton}">
+                                <button class="slds-button slds-button--neutral" onclick="{!v.cancelAction}">{!v.cancelButtonLabel}</button> 
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+        		</div>
+    		</div>
+  		</div>
+  		<div aura:id="sldsModalBackdrop" class="slds-modal-backdrop"></div>
+	</div>
+</aura:component>

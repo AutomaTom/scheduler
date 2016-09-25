@@ -1,0 +1,88 @@
+<aura:component controller="ManageScheduledJobsController">
+    <aura:attribute access="private" name="modal" type="Aura.Component"/>
+    <aura:attribute access="private" name="editJobComponent" type="Aura.Component"/>
+    <aura:attribute access="private" name="scheduledJob" type="Object" default="{}"/>
+    <aura:attribute access="private" name="scheduledJobs" type="Object[]"/>
+    <aura:attribute access="private" name="errorMessages" type="Aura.Component[]"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <aura:dependency resource="markup://c:EditScheduledJob" type="COMPONENT"/>
+    
+	<div class="slds-grid slds-theme--alt-inverse slds-p-around--large">
+        <h1 class="slds-text-heading--medium slds-truncate">Scheduled Jobs</h1>
+    </div>
+
+    <table class="slds-table slds-table--bordered">
+        <thead>
+            <tr class="slds-text-heading--label">
+                <c:DataTableColumn2 isHeader="true" label="Select All" title="Select All">
+                    <label class="slds-checkbox">
+                        <ui:inputCheckbox aura:id="selectAll" class="slds-checkbox" value="false" change="{!c.handleChangeEvent}"/>
+                        <span class="slds-checkbox--faux"></span>
+                    </label>
+                </c:DataTableColumn2>
+                <c:DataTableColumn2 isHeader="true" label="Name" title="Name">Name</c:DataTableColumn2>
+                <c:DataTableColumn2 isHeader="true" label="Status" title="Status">Status</c:DataTableColumn2>
+                <c:DataTableColumn2 isHeader="true" label="Class" title="Class">Class</c:DataTableColumn2>
+                <c:DataTableColumn2 isHeader="true" label="Cron" title="Cron">Cron</c:DataTableColumn2>
+            </tr>
+        </thead>    
+        <tbody>
+            <aura:iteration items="{!v.scheduledJobs}" var="row">
+                <tr>
+                    <c:DataTableColumn2 label="Select" title="{!row.selected}">
+                        <label class="slds-checkbox">
+                            <ui:inputCheckbox aura:id="selected" class="slds-checkbox" value="{!row.selected}" change="{!c.handleChangeEvent}"/>
+                            <span class="slds-checkbox--faux"></span>
+                        </label>
+                    </c:DataTableColumn2>
+                    <c:DataTableColumn2 label="Name" title="{!row.name}">
+                        <ui:outputUrl aura:id="{!row.recordId}" click="{!c.handleClickEvent}" label="{!row.name}" value="javascript:void(0);"/>
+                    </c:DataTableColumn2>
+                    <c:DataTableColumn2 label="Status" title="{!row.status}">{!row.status}</c:DataTableColumn2>
+                    <c:DataTableColumn2 label="Class" title="{!row.schedulableClass}">{!row.schedulableClass}</c:DataTableColumn2>
+                    <c:DataTableColumn2 label="Cron" title="{!row.cron}">{!row.cron}</c:DataTableColumn2>
+                </tr>
+            </aura:iteration>
+        </tbody>    
+    </table> 
+    
+    <div class="slds-text-align--right slds-m-around--small">
+        <div class="slds-button-group slds-float--right" role="group">
+            <button class="slds-button slds-button--brand" onclick="{!c.doNewJob}"> 
+                Add <c:svg ariaHidden="true" class="slds-button__icon slds-button__icon--small" xlinkHref="/resource/slds202/assets/icons/utility-sprite/svg/symbols.svg#add"/>
+            </button>
+            <button class="slds-button slds-button--neutral" onclick="{!c.doScheduleJobs}"> 
+                Schedule <c:svg ariaHidden="true" class="slds-button__icon slds-button__icon--small" xlinkHref="/resource/slds202/assets/icons/utility-sprite/svg/symbols.svg#clock"/>
+            </button>
+            <button class="slds-button slds-button--neutral " onclick="{!c.doAbortJobs}"> 
+                Abort <c:svg ariaHidden="true" class="slds-button__icon slds-button__icon--small" xlinkHref="/resource/slds202/assets/icons/utility-sprite/svg/symbols.svg#stop"/>
+            </button>
+            <button class="slds-button slds-button--destructive " onclick="{!c.doDeleteJobs}"> 
+                Delete <c:svg ariaHidden="true" class="slds-button__icon slds-button__icon--small" xlinkHref="/resource/slds202/assets/icons/utility-sprite/svg/symbols.svg#delete"/>
+            </button> 
+        </div>
+    </div>
+
+    <c:Modal aura:id="editJobModal" okAction="{!c.saveEdit}"
+             okButtonLabel="Save" footerClass="slds-text-align--center">
+        <aura:set attribute="header">
+            <h2 class="slds-text-heading--medium">Scheduled Job</h2>
+        </aura:set>
+        <!--Body is dynamically created-->
+    </c:Modal>
+    
+    <c:Modal aura:id="prompt" class="slds-modal--prompt" showCloseButton="false" 
+             showCancelButton="false" bodyClass="slds-p-around--medium"
+             headerClass="slds-theme--error slds-theme--alert-texture" 
+             footerClass="slds-theme--default slds-text-align--center">
+        <aura:set attribute="header">
+            <h2 class="slds-text-heading--medium">Error</h2>
+        </aura:set>
+        <!--Body is dynamically created-->
+    </c:Modal>
+    
+    <c:Spinner aura:id="spinner"/>
+    
+</aura:component>

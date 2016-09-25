@@ -1,0 +1,64 @@
+<aura:component >
+    
+    <aura:attribute access="public" name="scheduledJob" type="Object" required="true"/>
+    <aura:attribute access="public" name="isEdit" type="Boolean" default="false"/>
+    <aura:attribute access="public" name="isValid" type="Boolean" default="false"/>
+    <aura:attribute access="private" name="seconds" type="String" default="0"/>
+    <aura:attribute access="private" name="minutes" type="String" default="0"/>
+    <aura:attribute access="private" name="hours" type="String" default="*"/>
+    <aura:attribute access="private" name="days" type="String" default="*"/>
+    <aura:attribute access="private" name="months" type="String" default="*"/>
+    <aura:attribute access="private" name="weekdays" type="String" default="?"/>
+    <aura:attribute access="private" name="years" type="String" default="*"/>
+    <aura:attribute access="private" name="tabs" type="Object[]"/>
+    <aura:attribute access="private" name="tabContent" type="Aura.Component[]"/>
+
+    <aura:dependency resource="markup://c:CronSelect" type="COMPONENT"/>
+    <aura:dependency resource="markup://c:CronPicker" type="COMPONENT"/>
+    <aura:dependency resource="markup://c:CronDayPicker" type="COMPONENT"/>
+    <aura:dependency resource="markup://c:CronWeekdayPicker" type="COMPONENT"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+	<aura:handler name="cronUpdate" event="c:CronUpdate" 
+                  action="{!c.handleCronUpdateEvent}"/>
+    
+    <c:Form aura:id="editScheduledJobForm">
+        <c:FormElement aura:id="Name" required="true">
+            <ui:inputText class="slds-input" label="Name" 
+                          labelClass="slds-form-element__label" 
+                          change="{!c.handleChangeEvent}"
+                          required="true" requiredIndicatorClass="slds-required" 
+                          value="{!v.scheduledJob.name}" disabled="{!v.isEdit}"/>
+        </c:FormElement>
+        <c:FormElement aura:id="Class">
+            <ui:inputText class="slds-input" label="Class" 
+                          labelClass="slds-form-element__label" 
+                          change="{!c.handleChangeEvent}"
+                          required="true" requiredIndicatorClass="slds-required" 
+                          value="{!v.scheduledJob.schedulableClass}"/>
+        </c:FormElement>
+        <c:FormElement aura:id="Cron" required="true">
+            <ui:inputText class="slds-input" label="Cron" 
+                          labelClass="slds-form-element__label" 
+                          required="true" requiredIndicatorClass="slds-required" 
+                          value="{!v.scheduledJob.cron}" disabled="true"/>
+        </c:FormElement>
+    </c:Form>
+
+    <div class="slds-p-around--small">
+        <c:TabList tabBlur="{!c.handleTabBlurEvent}" 
+                   tabFocus="{!c.handleTabFocusEvent}">
+            <aura:set attribute="tabs">
+                <c:Tab name="Seconds" label="Seconds" focus="true"/>
+                <c:Tab name="Minutes" label="Minutes"/>
+                <c:Tab name="Hours" label="Hours"/>
+                <c:Tab name="Days" label="Days"/>
+                <c:Tab name="Months" label="Months"/>
+                <c:Tab name="Weekdays" label="Weekdays"/>
+                <c:Tab name="Years" label="Years"/>
+            </aura:set>
+            {!v.tabContent}
+        </c:TabList>
+    </div>
+   
+</aura:component>

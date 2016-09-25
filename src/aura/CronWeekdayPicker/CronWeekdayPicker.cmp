@@ -1,0 +1,23 @@
+<aura:component extends="c:CronPicker">
+    
+	<aura:attribute access="public" name="nthRangeOptions" type="Object[]" required="true"/>
+    <aura:attribute access="public" name="selectPicker" type="String" default="c:CronSelect"/>
+    
+    <aura:dependency resource="markup://c:CronSelect" type="COMPONENT"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <label class="slds-radio">
+        <ui:inputRadio aura:id="nthRange" name="cronOptions" change="{!c.handleRadioOnChange}"/>
+        <span class="slds-radio--faux"></span>
+        <span class="slds-form-element__label">
+            On Selected N<sup>th</sup>&nbsp;{!v.cronType}(s) of the Month
+        </span>
+    </label>
+    <label class="slds-radio">
+        <ui:inputRadio aura:id="last" name="cronOptions" change="{!c.handleRadioOnChange}"/>
+        <span class="slds-radio--faux"></span>
+        <span class="slds-form-element__label">On Last</span>
+    </label>
+	
+</aura:component>

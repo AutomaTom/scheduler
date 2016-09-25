@@ -1,0 +1,51 @@
+<aura:component extends="c:Cron" extensible="true">
+
+    <aura:attribute access="public" name="rangeOptions" type="Object[]" required="true"/>
+    <aura:attribute access="public" name="startAt" type="String" required="true"/>
+    <aura:attribute access="public" name="startAtOptions" type="Object[]" required="true"/>
+    <aura:attribute access="public" name="interval" type="String" default="1"/>
+    <aura:attribute access="public" name="intervalOptions" type="String[]"/>
+    <aura:attribute access="public" name="maxInterval" type="Integer" required="true"/>
+    <aura:attribute access="public" name="rangePicker" type="String" default="c:CronRangePicker"/>
+    <aura:attribute access="public" name="intervalPicker" type="String" default="c:CronIntervalPicker"/>
+    <aura:attribute access="public" name="picker" type="Aura.Component[]"/>
+    <aura:attribute access="public" name="showNotApplicable" type="Boolean" default="false"/>
+    
+    <aura:dependency resource="markup://c:CronIntervalPicker" type="COMPONENT"/>
+    <aura:dependency resource="markup://c:CronRangePicker" type="COMPONENT"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <c:Form aura:id="cronPickerForm">
+		<fieldset class="slds-form-element is-required">
+            <div class="slds-form-element__control">
+              	<label class="slds-radio">
+                    <ui:inputRadio aura:id="all" name="cronOptions" change="{!c.handleRadioOnChange}"/>
+                    <span class="slds-radio--faux"></span>
+                    <span class="slds-form-element__label">Every {!v.cronType}</span>
+              	</label>
+              	<label class="slds-radio">
+                    <ui:inputRadio aura:id="range" name="cronOptions" change="{!c.handleRadioOnChange}"/>
+                    <span class="slds-radio--faux"></span>
+                    <span class="slds-form-element__label">On Selected {!v.cronType}(s)</span>
+              	</label>
+                {!v.body}
+              	<label class="slds-radio">
+                    <ui:inputRadio aura:id="interval" name="cronOptions" change="{!c.handleRadioOnChange}"/>
+                    <span class="slds-radio--faux"></span>
+                    <span class="slds-form-element__label">On Interval</span>
+              	</label>
+                <aura:if isTrue="{!v.showNotApplicable}">
+                    <label class="slds-radio">
+                        <ui:inputRadio aura:id="notApplicable" name="cronOptions" change="{!c.handleRadioOnChange}"/>
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">N/A</span>
+                    </label>
+				</aura:if>
+			</div>
+		</fieldset>
+	</c:Form>
+    
+    {!v.picker}    
+    
+</aura:component>

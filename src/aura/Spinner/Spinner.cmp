@@ -1,0 +1,14 @@
+<aura:component >
+    
+    <aura:attribute access="public" name="class" type="String" default="slds-spinner slds-spinner--large"/>
+    <aura:method access="public" name="hide" action="{!c.hideSpinner}"/>
+    <aura:method access="public" name="show" action="{!c.showSpinner}"/>
+    
+	<div aura:id="spinner" class="slds-hide">
+		<div class="{!v.class}" aria-hidden="false" role="alert">
+			<div class="slds-spinner__dot-a"></div>
+			<div class="slds-spinner__dot-b"></div>
+		</div>
+	</div>
+    
+</aura:component>

@@ -1,0 +1,22 @@
+<aura:component >
+    
+    <aura:attribute access="public" name="label" type="String" required="true"/>
+    <aura:attribute access="public" name="title" type="String" required="true"/>
+    <aura:attribute access="public" name="isHeader" type="Boolean" default="false"/>
+    
+    <aura:if isTrue="{!v.isHeader}">
+        <th scope="col">
+            <div class="slds-truncate" title="{!v.title}">
+                {!v.body}
+            </div>
+        </th>
+        <aura:set attribute="else">
+            <td data-label="{!v.label}">
+                <div class="slds-truncate" title="{!v.title}">
+                    {!v.body}
+                </div>
+            </td>
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

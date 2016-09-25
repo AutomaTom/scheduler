@@ -1,0 +1,19 @@
+<aura:component >
+
+    <aura:attribute access="public" name="name" type="String" required="true"/>
+    <aura:attribute access="public" name="label" type="String" required="true"/>
+    <aura:attribute access="public" name="focus" type="Boolean" default="false"/>
+    <aura:attribute access="private" name="tabIndex" type="Integer" default="-1"/>
+    
+    <aura:registerEvent name="click" type="c:Click"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+	<li aura:id="listItem" class="slds-tabs--scoped__item slds-text-heading--label" 
+        title="{!v.label}" role="presentation">
+        <a class="slds-tabs--scoped__link" href="javascript:void(0);" role="tab" 
+           tabindex="{!v.tabIndex}" aria-selected="{!v.focus}" aria-controls="tabPanel" 
+           onclick="{!c.handleClickEvent}">{!v.label}</a>
+    </li>
+    
+</aura:component>

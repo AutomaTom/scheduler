@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute access="public" name="class" type="String" default="slds-form--stacked slds-m-around--small"/>
+    <div class="{!v.class}">
+		{!v.body}
+    </div>
+</aura:component>

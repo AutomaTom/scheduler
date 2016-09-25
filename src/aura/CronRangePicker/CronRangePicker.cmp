@@ -1,0 +1,33 @@
+<aura:component extends="c:Cron" extensible="true">
+
+    <aura:attribute access="public" name="rangeOptions" type="Object[]" required="true"/>
+    <aura:attribute access="public" name="handleCheckboxChange" type="Aura.Action" default="{!c.handleCheckboxChange}"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <c:Form >
+        <c:FormElement aura:id="rangeOptions">
+            <table>
+                <aura:iteration items="{!v.rangeOptions}" var="x">
+                    <tr>
+                        <aura:if isTrue="{!x.rowName}">
+                            <td>
+                                <ui:outputText class="slds-form-element__label" value="{!x.rowName}"/>
+                            </td>
+                        </aura:if>
+                        <aura:iteration items="{!x.rowOptions}" var="y">
+                            <td>
+                                <label class="slds-checkbox">
+                                    <ui:inputCheckbox change="{!v.handleCheckboxChange}" class="slds-checkbox" value="{!y.selected}"/>
+                                    <span class="slds-checkbox--faux"></span>
+                                    <span class="slds-form-element__label">{!y.label}</span>
+                                </label>
+                            </td>
+                        </aura:iteration>
+                    </tr>
+                </aura:iteration>
+            </table>    
+            {!v.body}
+        </c:FormElement>
+    </c:Form>    
+</aura:component>

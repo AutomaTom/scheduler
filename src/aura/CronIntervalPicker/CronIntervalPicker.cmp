@@ -1,0 +1,35 @@
+<aura:component extends="c:Cron" extensible="true">
+
+    <aura:attribute access="public" name="startAt" type="String" required="true"/>
+    <aura:attribute access="public" name="startAtOptions" type="Object[]" required="true"/>
+    <aura:attribute access="public" name="interval" type="String" default="1"/>
+    <aura:attribute access="public" name="intervalOptions" type="String[]"/>
+    <aura:attribute access="public" name="maxInterval" type="Integer" required="true"/>
+    
+	<aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <c:Form class="slds-form--inline slds-p-top--small">
+    	<c:FormElement >
+            <ui:inputSelect aura:id="startAt" change="{!c.handleChangeEvent}" class="slds-input" 
+                            label="Start" labelClass="slds-form-element__label" 
+                            value="{!v.startAt}">
+                <aura:iteration items="{!v.startAtOptions}" var="option">
+                    <ui:inputSelectOption label="{!option.label}" text="{!option.value}" />
+                </aura:iteration>
+            </ui:inputSelect>
+        </c:FormElement>
+        <c:FormElement >
+            <ui:inputSelect aura:id="interval" change="{!c.handleChangeEvent}" class="slds-input" 
+                            label="And Then Every" labelClass="slds-form-element__label" 
+                            value="{!v.interval}">
+                <aura:iteration items="{!v.intervalOptions}" var="option">
+                    <ui:inputSelectOption label="{!option}" text="{!option}"/>
+                </aura:iteration>
+            </ui:inputSelect>
+    	</c:FormElement>
+        <c:FormElement >
+            <label class="slds-form-element__label">{!v.cronType}(s)</label>
+        </c:FormElement> 
+    </c:Form>    
+
+</aura:component>

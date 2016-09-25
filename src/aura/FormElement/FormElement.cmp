@@ -1,0 +1,20 @@
+<aura:component >
+    <aura:attribute access="public" name="error" type="Aura.Component[]"/> 
+    <aura:attribute access="public" name="required" type="Boolean" default="false"/>
+    <aura:method access="public" name="addError" action="{!c.addError}">
+        <aura:attribute name="message" type="String"/>
+    </aura:method>
+    <aura:method access="public" name="addErrors" action="{!c.addErrors}">
+        <aura:attribute name="messages" type="String[]"/>
+    </aura:method>
+    <aura:method access="public" name="clearError" action="{!c.clearError}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:dependency resource="markup://c:FormElementError" type="COMPONENT"/>
+    
+    <div aura:id="formElement" class="slds-form-element">
+        <label class="slds-form-element__label"/>
+        <div class="slds-form-element__control">
+            {!v.body} {!v.error}
+        </div>
+    </div>
+</aura:component>

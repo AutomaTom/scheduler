@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>This custom setting should be used to define batch jobs and scheduled jobs which can be started and stopped individually or en masse from the Apex Jobs tab</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>BatchJobClass__c</fullName>
+        <description>The name of an Apex Class that implements the batchable interface</description>
+        <externalId>false</externalId>
+        <label>Batch Job Class</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BatchSize__c</fullName>
+        <externalId>false</externalId>
+        <label>Batch Size</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CronExpression__c</fullName>
+        <externalId>false</externalId>
+        <label>Cron Expression</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScheduledJobClass__c</fullName>
+        <description>The name of an Apex Class that implements the schedulable interface</description>
+        <externalId>false</externalId>
+        <label>Scheduled Job Class</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Apex Job Settings</label>
+    <visibility>Protected</visibility>
+</CustomObject>

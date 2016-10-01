@@ -10,9 +10,7 @@
     <label class="slds-radio">
         <ui:inputRadio aura:id="nthRange" name="cronOptions" change="{!c.handleRadioOnChange}"/>
         <span class="slds-radio--faux"></span>
-        <span class="slds-form-element__label">
-            On Selected N<sup>th</sup>&nbsp;{!v.cronType}(s) of the Month
-        </span>
+        <span class="slds-form-element__label">On Selected N<sup>th</sup>&nbsp;{!v.cronType}(s) of the Month</span>
     </label>
     <label class="slds-radio">
         <ui:inputRadio aura:id="last" name="cronOptions" change="{!c.handleRadioOnChange}"/>

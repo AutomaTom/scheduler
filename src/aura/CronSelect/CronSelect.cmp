@@ -2,6 +2,7 @@
 
     <aura:attribute access="public" name="selectOptions" type="Object[]" required="true"/>
 
+	<aura:handler name="init" value="{!this}" action="{!c.init}"/>
 	<aura:handler name="change" event="ui:change" action="{!c.handleChangeEvent}"/>
     
     <c:Form aura:id="cronSelectForm" class="slds-form--inline">
